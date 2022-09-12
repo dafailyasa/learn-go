@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"pertama/calculation"
 )
@@ -173,7 +174,71 @@ func main() {
 
 	fmt.Println("Sum Of Score", sumOfScore)
 	fmt.Println("GoodScores:", goodScores)
+	setence := printResult("Hello.")
+	fmt.Println(setence)
 
+	luas, keliling := calcuate(4, 5)
+	fmt.Println("Luas:", luas)
+	fmt.Println("Keliling:", keliling)
+
+	sumTest := sumTest(scores)
+
+	fmt.Println(sumTest)
+
+	//result, err := calcuateTest(2,4,"+")
+	//result, err := calcuateTest(2, 4, "-")
+	//result, err := calcuateTest(2, 4, "*")
+	//result, err := calcuateTest(2, 4, "/")
+	result, err := calcuateTest(2, 4, "=")
+	if err != nil {
+		fmt.Println("Terjadi Kesalahan")
+		fmt.Println(err.Error())
+	}
+	fmt.Println(result)
 }
+
+func printResult(value string) string {
+	result := value + " from function"
+	return result
+}
+
+// function with predefined return value
+func calcuate(panjang int, lebar int) (luas int, keliling int) {
+	luas = panjang * lebar
+	keliling = 2 * (panjang + lebar)
+
+	return
+}
+
+func sumTest(numbers []int) (total int) {
+	for _, number := range numbers {
+		total = total + number
+	}
+	return total
+}
+
+func calcuateTest(numberOne int, numberTwo int, operator string) (result int, errResult error) {
+	switch operator {
+	case "+":
+		result = numberOne + numberTwo
+	case "-":
+		result = numberOne - numberTwo
+	case "*":
+		result = numberOne * numberTwo
+	case "/":
+		result = numberOne / numberTwo
+	default:
+		errResult = errors.New("Uknown Operation value")
+	}
+	return result, errResult
+}
+
+/**
+func calcuate(panjang int, lebar int) (int, int) {
+	luas := panjang * lebar
+	keliling := 2 * (panjang + lebar)
+	return luas, keliling
+}
+**/
 
 // go build; go mod init pertama; ./pertama;
