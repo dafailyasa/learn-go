@@ -6,6 +6,29 @@ import (
 	"pertama/calculation"
 )
 
+//============= STRUCT ON GOLANG (LIKE DTO ON NEST.JS)  START ===========================
+type Employee struct {
+	name     string
+	position string
+	salary   int
+}
+
+type User struct {
+	ID        int
+	firstName string
+	lastName  string
+	email     string
+	isActive  bool
+	employees []Employee // embedded struct
+}
+
+func (user User) display() (result string) {
+	result = fmt.Sprintf("Full Name %s %s, Email: %s ==== USE DISPLAY FUNCTION METHOD", user.firstName, user.lastName, user.email)
+	return
+}
+
+//============= STRUCT ON GOLANG (LIKE DTO ON NEST.JS) END ===========================
+
 func main() {
 	fmt.Println("HELLO WORD")
 
@@ -195,6 +218,65 @@ func main() {
 		fmt.Println(err.Error())
 	}
 	fmt.Println(result)
+
+	// ========================= STRUCT GOLANG START ========================================
+	// ========================= STRUCT GOLANG START ========================================
+
+	// ----------- Example assigned struct on user 1 Object--------------
+	// user := User{}
+	// user.ID = 1
+	// user.firstName = "Dafa"
+	// user.lastName = "Ilyasa"
+	// user.email = "dafailyasa@mail.com"
+	// user.isActive = true
+
+	// ----------- Example assigned struct on user Array of Objects --------------
+
+	dafaEmploye := Employee{
+		name:     "tokopedia",
+		position: "backend-dev",
+		salary:   8000,
+	}
+
+	alexEmploye := Employee{
+		name:     "bukalapak",
+		position: "frontend-dev",
+		salary:   8000,
+	}
+
+	dafa := User{
+		ID:        1,
+		firstName: "Dafa",
+		lastName:  "Ilyasa",
+		email:     "dafa@mail.com",
+		isActive:  true,
+		employees: []Employee{dafaEmploye},
+	}
+
+	alex := User{2, "Alex", "Ida", "alex@mail.com", true, []Employee{alexEmploye}}
+
+	users := []User{dafa, alex}
+
+	fmt.Println("ALL USERS ===", users)
+
+	for _, user := range users {
+		displayUser := displayUser(user)
+
+		useDisplay := user.display()
+		fmt.Println(useDisplay)
+
+		fmt.Println(user, "   ====PRINT WITH LOOP=====")
+		fmt.Println(displayUser, "   ===== PRINT USE FUNCTION TO DISPLAY USER =====")
+	}
+
+	// ========================= STRUCT GOLANG END ========================================
+	// ========================= STRUCT GOLANG END ========================================
+}
+
+func displayUser(user User) (result string) {
+	result = fmt.Sprintf("Full Name %s %s, Email: %s", user.firstName, user.lastName, user.email)
+
+	return
 }
 
 func printResult(value string) string {
