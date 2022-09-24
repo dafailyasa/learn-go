@@ -13,6 +13,7 @@ type Employee struct {
 	salary   int
 }
 
+
 type User struct {
 	ID        int
 	firstName string
@@ -26,7 +27,6 @@ func (user User) display() (result string) {
 	result = fmt.Sprintf("Full Name %s %s, Email: %s ==== USE DISPLAY FUNCTION METHOD", user.firstName, user.lastName, user.email)
 	return
 }
-
 //============= STRUCT ON GOLANG (LIKE DTO ON NEST.JS) END ===========================
 
 func main() {
